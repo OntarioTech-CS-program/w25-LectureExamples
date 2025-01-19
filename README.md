@@ -8,3 +8,6 @@ IntelliJ Project.
 
 Simple IntelliJ Java project using Maven to build a `.jar` file.
 
+## Week 2 Activity
+In-class activities creating GUI application.
+
