@@ -11,5 +11,8 @@ Simple IntelliJ Java project using Maven to build a `.jar` file.
 ## Week 2 Activity
 In-class activities creating GUI application.
 
+## Week 3 Activity - ChatApp
+In-class activity boilerplate. Solution will be pushed after both lectures in week 3.
+
 ## Module 4 Short Examples
 Collection of Java programs linked to the Module 4 videos/slides. 
