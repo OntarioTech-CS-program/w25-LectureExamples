@@ -13,7 +13,7 @@ public class ChatController {
         view.getSendButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO:send message
+                sendMessage();
             }
         });
 
@@ -21,13 +21,18 @@ public class ChatController {
         view.getInputField().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO:send message
+                sendMessage();
             }
         });
     }
 
     private void sendMessage() {
-        // TODO
+        String message = view.getInputField().getText().trim();
+        if (!message.isEmpty()) {
+            model.addMessage(message); // Add message to the model
+            view.updateChatArea(message); // Update the chat area in the view
+            view.getInputField().setText(""); // Clear the input field
+        }
     }
 
     public static void main(String[] args) {
@@ -35,7 +40,8 @@ public class ChatController {
         ChatModel model = new ChatModel();
         ChatView view = new ChatView();
 
-	// TODO: Create controller
+        // Create controller
+        new ChatController(model, view);
 
         // Make the GUI visible
         view.setVisible(true);
