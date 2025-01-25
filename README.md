@@ -16,3 +16,6 @@ In-class activity boilerplate. Solution will be pushed after both lectures in we
 
 ## Module 4 Short Examples
 Collection of Java programs linked to the Module 4 videos/slides. 
+
+## Module 4 - SwingDemo
+Java examples creating UI components and events.
