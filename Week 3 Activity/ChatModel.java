@@ -6,6 +6,7 @@ public class ChatModel {
 
     public void addMessage(String message) {
        // TODO:add new message
+	   messages.add(message);
     }
 
     public List<String> getMessages() {
