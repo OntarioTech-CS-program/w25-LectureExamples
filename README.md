@@ -19,3 +19,6 @@ Collection of Java programs linked to the Module 4 videos/slides.
 
 ## Module 4 - SwingDemo
 Java examples creating UI components and events.
+
+## Week 4 Activity
+IntelliJ Project for Activity in Week 4 class.
