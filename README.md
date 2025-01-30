@@ -22,3 +22,6 @@ Java examples creating UI components and events.
 
 ## Week 4 Activity
 IntelliJ Project for Activity in Week 4 class.
+
+## Module 5 - examples `FindAverage` and `WordCounter`
+Intellij Project with demos for Module 5 on Files IO.
