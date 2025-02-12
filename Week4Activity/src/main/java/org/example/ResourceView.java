@@ -37,11 +37,11 @@ public class ResourceView extends JFrame {
 //        DefaultMutableTreeNode subchild12 = new DefaultMutableTreeNode("Child of 1.2");
 //        child1.add(subchild11);
 //        child1.add(subchild12);
-//
+
 //
         // create JTree
 
-        DefaultMutableTreeNode root = buildResourceTree("");
+        DefaultMutableTreeNode root = buildResourceTree("input");
         JTree tree = new JTree(root);
         JScrollPane treeScrollPane = new JScrollPane(tree);
         treePanel.add(treeScrollPane, BorderLayout.CENTER);
@@ -51,24 +51,25 @@ public class ResourceView extends JFrame {
 
     public DefaultMutableTreeNode buildResourceTree(String folderName) {
         // TODO: get resource folder URL for given folderName
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        URL resource = classLoader.getResource(folderName);
 
+        if (resource == null) {
+            throw new IllegalArgumentException("Folder not found: " + folderName);
+        }
 
-//        if (resource == null) {
-//            throw new IllegalArgumentException("Folder not found: " + folderName);
-//        }
-//
         // TODO: replace this wih variable declaration only -- see commented line
-//        File folder;
-        File folder = new File(folderName);
-//        try {
-//            folder = new File(resource.toURI());
-//        } catch (Exception e) {
-//            throw new RuntimeException("Error accessing folder: " + folderName, e);
-//        }
-////
-//        if (!folder.exists() || !folder.isDirectory()) {
-//            throw new IllegalArgumentException("Invalid folder: " + folderName);
-//        }
+        File folder;
+//        File folder = new File(folderName);
+        try {
+            folder = new File(resource.toURI());
+        } catch (Exception e) {
+            throw new RuntimeException("Error accessing folder: " + folderName, e);
+        }
+//
+        if (!folder.exists() || !folder.isDirectory()) {
+            throw new IllegalArgumentException("Invalid folder: " + folderName);
+        }
 
         return buildTreeNode(folder);
     }
@@ -76,7 +77,19 @@ public class ResourceView extends JFrame {
     private DefaultMutableTreeNode buildTreeNode(File folder) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(folder.getName());
         // TODO: get all folder and files recursively
-        
+        File[] files = folder.listFiles();
+        if(files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    // call itself for this folder
+                    node.add(buildTreeNode(file));
+                }else {
+                    // it's a file so add it as a node
+                    node.add(new DefaultMutableTreeNode(file.getName()));
+                }
+            }
+        }
+
 
         return node;
     }
