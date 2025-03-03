@@ -12,13 +12,22 @@ public class SocketClient {
              BufferedReader console = new BufferedReader(new InputStreamReader(System.in))) {
             // TODO: modify client to read user name and send it to server
             // TODO: server replies include the user name; until the user enters 'exit' as message
+            System.out.print("Enter your name: ");
+            String name = console.readLine();
+            output.println(name);
+            while(true){
+                System.out.print("Enter message: ");
+                String message = console.readLine(); // Read user input
 
-            System.out.print("Enter message: ");
-            String message = console.readLine(); // Read user input
-            output.println(message); // Send to server
+                //check if exit
+                if(message.equals("exit")){
+                    break;
+                }
+                output.println(message); // Send to server
 
-            String response = input.readLine(); // Read server response
-            System.out.println("Server replied: " + response);
+                String response = input.readLine(); // Read server response
+                System.out.println("Server replied: " + response);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

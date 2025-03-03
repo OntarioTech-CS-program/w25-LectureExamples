@@ -18,11 +18,20 @@ public class SocketServer {
                 // TODO: server keeps reading until client is done
                 // TODO: server replies include the user name; until the user enters 'exit' as message
                 // Read client message
-                String clientMessage = input.readLine();
-                System.out.println("Received: " + clientMessage);
+                String clientMessage;
+                String clientName = input.readLine();
 
-                // Respond to client
-                output.println("Server: Hello, you said - " + clientMessage);
+                while((clientMessage=input.readLine())!=null) {
+                    System.out.println("Received from " + clientName+": "+clientMessage);
+                    // Respond to client
+                    output.println("Server: Hello, "+clientName+" said - " + clientMessage);
+                }
+                System.out.println(clientName+" left.");
+
+//                System.out.println("Received: " + clientMessage);
+
+//                // Respond to client
+//                output.println("Server: Hello, you said - " + clientMessage);
 
                 // Close connection
                 socket.close();
