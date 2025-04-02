@@ -37,10 +37,20 @@ public class ChatServer {
                 // Prompt client for username
                 username = in.readLine();
                //TODO: add to clients
+                synchronized (clients) {
+                    clients.put(username, this);
+                }
+
 
                 // Send list of connected clients and their names
                 StringBuilder clientsList = new StringBuilder("Connected users");
                 // TODO: send list to client
+                synchronized (clients){
+                    clientsList.append(" (").append(clients.size()).append("): ");
+                    for(String name : clients.keySet()) {
+                        clientsList.append(name).append(" ");
+                    }
+                }
 
                 out.println(clientsList.toString());
 
@@ -59,6 +69,11 @@ public class ChatServer {
                 while ((message = in.readLine()) != null) {
                     System.out.println(username + ": " + message);
                    // TODO: broadcast message
+                    synchronized (clientHandlers) {
+                        for(ClientHandler handler : clientHandlers) {
+                            handler.out.println(username + ": " + message);
+                        }
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
