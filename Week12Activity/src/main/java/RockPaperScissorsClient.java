@@ -87,15 +87,24 @@ class RockPaperScissorsClient {
                 SwingUtilities.invokeLater(() -> {
                     if (finalMessage.startsWith("ID")) {
                     // TODO: set playerLabel and statusLabel
-
-
+                        playerID = finalMessage.split(" ")[1];
+                        playerLabel.setText("You are Player "+playerID+".");
+                        statusLabel.setText("Waiting for second player.");
                     } else if (finalMessage.equals("Both players connected. Make your move: Rock, Paper, or Scissors")) {
                         statusLabel.setText("Make your move!");
                         enableButtons();
                     } else {
                         // TODO: decide on the outcome of the game, display JOptionPane, ready to play again
                         statusLabel.setText(finalMessage);
-                        
+                        if(finalMessage.contains("wins") || finalMessage.contains("tie")) {
+                            if (finalMessage.contains(playerID)){
+                                JOptionPane.showMessageDialog(frame, "You win!");
+                            }else{
+                                JOptionPane.showMessageDialog(frame, finalMessage);
+                            }
+                        }
+
+
                     }
                 });
             }
